@@ -53,8 +53,6 @@ export function mapConfig(dataId, type) {
     },
     mapState: {
       zoom: 11
-      // latitude: -33.45694,
-      // longitude: -70.64827
     }
   };
 }
@@ -191,76 +189,3 @@ export function tmaLayerConfig(dataId, name) {
   ];
 
 }
-
-/*
-const mapConfig = {
-  visState: {
-    filters: [],
-    layers: [
-      {
-        id: "xbbp4of3",
-        type: "heatmap",
-        config: {
-          dataId: "simi_id",
-          label: "Reportes HeatMap",
-          columns: {
-            lat: "lat",
-            lng: "lon"
-          },
-          isVisible: false,
-          visConfig: {
-            worldUnitSize: 12, // hexagon Radius (KM)
-            coverage: 1
-          }
-        }
-      },
-      {
-        id: "xbbp4of2",
-        type: "point",
-        config: {
-          dataId: "simi_id",
-          label: "Reportes Point",
-          columns: {
-            lat: "lat",
-            lng: "lon"
-          },
-          color: [227, 26, 26],
-          isVisible: true,
-          visConfig: {
-            worldUnitSize: 12, // hexagon Radius (KM)
-            coverage: 1,
-            label: "Latitude",
-            strokeColor: [0, 0, 0],
-            outline: false,
-            radius: 40,
-            zoom: 11
-          }
-          /!*textLabel: [
-              {
-                  field: {
-                      id: 'Categories',
-                  },
-                  color: [255, 255, 255],
-                  size: 18,
-                  offset: [0, 0],
-                  anchor: 'start',
-                  alignment: 'center',
-              },
-          ],*!/
-        }
-      }
-    ],
-    layerBlending: "normal",
-    interactionConfig: {
-      geocoder: {
-        enabled: false
-      }
-    }
-  },
-  mapState: {
-    zoom: 11,
-    latitude: -33.45694,
-    longitude: -70.64827
-  }
-};
-*/

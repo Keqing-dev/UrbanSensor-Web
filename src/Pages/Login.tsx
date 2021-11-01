@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../assets/img/mapoteca-logo.png';
+// import logo from '../assets/img/mapoteca-logo.png';
 import Input from '../Components/Forms/Input';
 import { Form, Formik } from 'formik';
 import * as Unicons from '@iconscout/react-unicons';
@@ -7,7 +7,6 @@ import { login } from '../Api/api';
 import { useHistory } from 'react-router-dom';
 import { Puff } from '@agney/react-loading';
 import { object, string } from 'yup';
-import jwt_decode from 'jwt-decode';
 import santiago from '../assets/img/santiago.mp4';
 
 function Login() {
@@ -18,10 +17,8 @@ function Login() {
     useEffect(() => {
         let token = localStorage.getItem('tk');
         if (token !== null ) {
-            console.log(token);
-            let decoded = jwt_decode(token);
             // @ts-ignore
-            history.replace(decoded.role.toLowerCase().trim() === 'admin' ? '/admin' : '/map');
+            history.replace('/map');
         }
     }, [history]);
 
@@ -30,12 +27,12 @@ function Login() {
             <div className='left-side'>
                 <header className='logo-mapo'>
                     <div className='logo-container'>
-                        <img className='img-fluid' src={logo} alt='' />
+                        {/*<img className='img-fluid' src={logo} alt='' />*/}
+                        <p>Logo</p>
                     </div>
                     <div className='mx-3 my-auto'>
-                        <h5>Mapoteca</h5>
-                        <h6>mapoteca.cl</h6>
-                        <h6>weare@mapoteca.co</h6>
+                        <h5>UrbanSensor</h5>
+                        <h6>urbansensor.cl</h6>
                     </div>
                 </header>
 
@@ -61,7 +58,6 @@ function Login() {
                                     return res.data;
                                 })
                                 .then((data) => {
-                                    console.log(data);
                                     localStorage.setItem('tk', data.data.token);
                                     //@ts-ignore
                                     history.replace('/map');

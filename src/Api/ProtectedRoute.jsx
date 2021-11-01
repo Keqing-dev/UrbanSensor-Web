@@ -26,7 +26,6 @@ export default class ProtectedRoute extends React.Component {
                         return res.data;
                     })
                     .then(() => {
-                        console.log('jeje');
                         let decoded = jwt_decode(token);
                         store.dispatch({
                             type: 'SET_USER',
