@@ -1,74 +1,13 @@
 import axios from 'axios';
-import { GridSortModel } from '@mui/x-data-grid';
 
-const url = 'https://urban.keqing.dev';
+const { REACT_APP_API_URL } = process.env;
+const url = REACT_APP_API_URL;
 
-/*type Data<Type> = {
-    data: Type;
-};*/
 
-type Content<Type> = {
-    content: [Type];
-    paging?: {
-        maxItems: number;
-    };
-};
-
-type Message = {
-    message: string;
-};
-
-type UserData = {
-    id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    position?: string;
-    createdAt: string;
-    updatedAt: string;
-    roleId: string;
-    orgId?: string;
-    organization?: OrganizationData;
-};
-
-type OrganizationData = {
-    id: string;
-    name: string;
-    bucket: string;
-    createdAt: string;
-    updatedAt: string;
-};
 
 type User = {
     email: string;
     password: string;
-};
-
-type CreateUser = {
-    id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    position?: string;
-    roleId: string;
-    orgId?: string;
-};
-
-type CreateOrg = {
-    name: string;
-    bucket: string;
-};
-
-type Role = {
-    id: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-};
-
-type Search = {
-    search: string;
-    page: number;
 };
 
 export type Token = {
@@ -79,12 +18,6 @@ export type Token = {
 
 export function getToken() {
     return localStorage.getItem('tk');
-}
-
-function getTokenHeaders() {
-    return {
-        Authorization: `Bearer ${getToken()}`,
-    };
 }
 
 export function login({ email, password }: User) {

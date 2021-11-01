@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import Mapbar from '../Components/Navigators/Mapbar';
 import { PointsState } from '../Redux';
 import { PointsDispatchToProps } from '../Redux/Actions/PointsAction';
@@ -13,16 +13,8 @@ const { REACT_APP_MAPBOX_TOKEN } = process.env;
 
 function Map({ isSelected }: any) {
     const history = useHistory();
-    const dispatch = useDispatch();
-    const [mapPoints, setMapPoints] = useState();
-    const [error, setError] = useState(false);
+    const [error] = useState(false);
 
-    const [projects, setProjects] = useState([]);
-    const [project, setProject] = useState({
-        name: undefined,
-    });
-    const [hasMore, setHasMore] = useState(true);
-    const [page, setPage] = useState(1);
 
     useEffect(() => {
         // @ts-ignore

@@ -260,17 +260,21 @@ i {
 }
 
 .projects-cards {
-  background-color: $secondary;
+  background-color: $primary-alt;
   padding: 12px;
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: auto;
   width: auto;
+  max-width: 500px;
+  transition: 0.25s;
+  margin: 12px 0;
 
   overflow-x: hidden;
 
   .project {
-    background-color: $primary-alt;
+    background-color: $secondary;
+
     //width: 200px;
     padding: 10px;
     display: flex;

@@ -2,19 +2,14 @@ import React, {useState } from 'react';
 import * as Unicons from '@iconscout/react-unicons';
 import { useHistory } from 'react-router-dom';
 import { logout } from '../../utils/logout';
-import { connect, useDispatch } from 'react-redux';
-import { PointsState, UserState } from '../../Redux';
+import { connect } from 'react-redux';
+import { PointsState } from '../../Redux';
 import Charts from '../Charts';
-import { Puff } from '@agney/react-loading';
 import { PointsDispatchToProps } from '../../Redux/Actions/PointsAction';
 
 function Mapbar({ setProjectAct }: any) {
     const history = useHistory();
     const [isExpanded, setExpanded] = useState(false);
-    const [isLoading, setLoading] = useState(false);
-    const [imageUri, setImageUri] = useState('');
-    const dispatch = useDispatch();
-
 
     function handleFloatPane() {
         let floatButtonGroup = document.getElementById('float-button-group-section');
@@ -33,16 +28,6 @@ function Mapbar({ setProjectAct }: any) {
 
     return (
         <div>
-            <div id='screenshot-map' className='screenshot-container d-none'>
-                <img src={imageUri} alt='' />
-            </div>
-            {isLoading ? (
-                <div className='loading-content' data-html2canvas-ignore>
-                    {/*//@ts-ignore*/}
-                    <Puff width={50} />
-                    <p>Generando captura</p>
-                </div>
-            ) : null}
 
             <div id='float-button-group-section' className='float-button-group '>
 
