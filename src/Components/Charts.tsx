@@ -64,32 +64,7 @@ function Charts({ pointSelected, setMapDatasetAct, client, mapDatasets }: any) {
         chart.current = [...chart.current, myChart];
     }
 
-    useEffect(() => {
-        destroyCharts();
-        return () => {
-            destroyCharts();
-        };
-    }, [pointSelected]);
 
-    useEffect(() => {
-        if (pointSelected.lat !== null) {
-            let tmaDataset = mapDatasets.datasets.filter((obj: any) => obj.info.id !== 'tma_id');
-            let dataToMap = {
-                ...mapDatasets,
-                datasets: [
-                    ...tmaDataset,
-                    { info: { label: `${client} Tma`, id: 'tma_id' }, data: processGeojson(pointSelected.tma) },
-                ],
-                options: { centerMap: false, readOnly: false },
-            };
-            setMapDatasetAct(dataToMap);
-            dispatch(
-                addDataToMap({
-                    ...dataToMap,
-                }),
-            );
-        }
-    }, [pointSelected]);
 
     const destroyCharts = () => {
         if (chart.current.length !== 0) {
@@ -142,24 +117,7 @@ function Charts({ pointSelected, setMapDatasetAct, client, mapDatasets }: any) {
                 </div>
             </header>
             <div className='chart-pane'>
-                <div className={pointSelected.lat && pointSelected.lon ? 'chart-wrapper' : 'd-none'}>
-                    <canvas id='visitsChart' />
-                    <canvas id='originChart' />
-                    <canvas id='destinyChart' />
-                    <canvas id='nseChart' />
-                </div>
-                <div
-                    className={
-                        pointSelected.lat && pointSelected.lon
-                            ? 'd-none'
-                            : 'd-flex flex-column h-100 justify-content-center align-items-center align-content-center'
-                    }
-                >
-                    <Unicons.UilSadDizzy size='128' color='#6A7485' />
-                    <span>Aún no hay información que graficar.</span>
-                    <span>Selecciona un punto para comenzar a ver los gráficos</span>
-                    <p style={{ fontSize: '0.7rem' }}>o vuelve a seleccionar el punto.</p>
-                </div>
+
             </div>
         </div>
     );

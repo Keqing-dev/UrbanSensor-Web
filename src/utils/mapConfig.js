@@ -128,8 +128,8 @@ export function pointsLayerConfig(dataId, name) {
         dataId: dataId || "reportes_id",
         label: `${name} HeatMap`,
         columns: {
-          lat: "lat",
-          lng: "lon"
+          lat: "Latitude",
+          lng: "Longitude"
         },
         isVisible: false,
         visConfig: {
@@ -145,8 +145,8 @@ export function pointsLayerConfig(dataId, name) {
         dataId: dataId || "reportes_id",
         label: `${name} Puntos`,
         columns: {
-          lat: "lat",
-          lng: "lon"
+          lat: "Latitude",
+          lng: "Longitude"
         },
         color: [227, 26, 26],
         isVisible: true,

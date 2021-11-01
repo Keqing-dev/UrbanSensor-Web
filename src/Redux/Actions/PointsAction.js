@@ -1,12 +1,9 @@
 export const PointsDispatchToProps = (dispatch) => ({
-    setPointsAct(json) {
+    setProjectAct(isSelected) {
         //parsear json
         dispatch({
-            type: 'SET_POINTS',
-            payload: {
-                ...json,
-                points: json.points.flat(),
-            },
+            type: 'SET_PROJECT',
+            isSelected
         });
     },
 

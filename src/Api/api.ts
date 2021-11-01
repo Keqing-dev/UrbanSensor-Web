@@ -99,4 +99,20 @@ export function auth() {
         },
     });
 }
+export function getProjects(page:number) {
+    let token = getToken();
+    return axios.get(`${url}/project?page=${page}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+}
 
+export function getCsvReports(id:string) {
+    let token = getToken();
+    return axios.get(`${url}/csv/reports?projectId=${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+}

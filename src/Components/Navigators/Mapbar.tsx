@@ -1,87 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import * as Unicons from '@iconscout/react-unicons';
 import { useHistory } from 'react-router-dom';
-import html2canvas from 'html2canvas';
 import { logout } from '../../utils/logout';
 import { connect, useDispatch } from 'react-redux';
-import { UserState } from '../../Redux';
-import { Link } from 'react-router-dom';
+import { PointsState, UserState } from '../../Redux';
 import Charts from '../Charts';
-import { setExportImageSetting } from 'kepler.gl/actions';
 import { Puff } from '@agney/react-loading';
-import { AlertDispatchToProps } from '../../Redux/Actions/AlertAction';
+import { PointsDispatchToProps } from '../../Redux/Actions/PointsAction';
 
-function Mapbar({ isAdmin, exportImage, setAlertAct, client }: any) {
+function Mapbar({ setProjectAct }: any) {
     const history = useHistory();
     const [isExpanded, setExpanded] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [imageUri, setImageUri] = useState('');
     const dispatch = useDispatch();
 
-    async function screenShot() {
-        setLoading(true);
-        await dispatch(
-            setExportImageSetting({
-                error: undefined,
-                legend: false,
-                mapW: window.screen.width,
-                mapH: window.screen.height,
-                imageSize: { imageH: window.screen.height, imageW: window.screen.width, scale: 1 },
-                exporting: true,
-                processing: true,
-                resolution: 'ONE_X',
-                ratio: 'SCREEN',
-            }),
-        );
-    }
-
-    useEffect(() => {
-        if (exportImage !== undefined) {
-            if (exportImage.imageDataUri.trim() !== '') {
-                let screenshotDiv = document.getElementById('screenshot-map');
-                setImageUri(exportImage.imageDataUri);
-                screenshotDiv?.classList.remove('d-none');
-                dispatch(
-                    setExportImageSetting({
-                        imageDataUri: '',
-                        imageSize: { imageH: 0, imageW: 0, scale: 0 },
-                        exporting: false,
-                        processing: true,
-                    }),
-                );
-            }
-        }
-    }, [exportImage, dispatch]);
-
-    useEffect(() => {
-        if (imageUri.trim() !== '') {
-            html2canvas(document.body, {
-                allowTaint: true,
-                foreignObjectRendering: true,
-            }).then((canvas) => {
-                saveAs(canvas.toDataURL(), `${client.toLowerCase().replace(/ /gm, '')}-screenshot.png`);
-                setLoading(false);
-            });
-        }
-        // eslint-disable-next-line
-    }, [imageUri]);
-
-    function saveAs(uri: any, filename: any) {
-        let link = document.createElement('a');
-        if (typeof link.download === 'string') {
-            link.href = uri;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } else {
-            window.open(uri);
-        }
-        let screenshotDiv = document.getElementById('screenshot-map');
-        screenshotDiv?.classList.add('d-none');
-        setImageUri('');
-        setAlertAct({ isActive: true, message: 'Captura exitosa.' });
-    }
 
     function handleFloatPane() {
         let floatButtonGroup = document.getElementById('float-button-group-section');
@@ -112,17 +45,10 @@ function Mapbar({ isAdmin, exportImage, setAlertAct, client }: any) {
             ) : null}
 
             <div id='float-button-group-section' className='float-button-group '>
-                {isAdmin ? (
-                    <Link to={'/admin'} className='button-square'>
-                        <span menu-name='Dashboard'>
-                            <Unicons.UilEstate />
-                        </span>
-                    </Link>
-                ) : null}
 
-                <div className='button-square' id='butt' onClick={screenShot}>
-                    <span menu-name='Capturar pantalla'>
-                        <Unicons.UilFileExport />
+                <div className='button-square' id='butt' onClick={()=>setProjectAct(false)}>
+                    <span menu-name='Proyectos'>
+                        <Unicons.UilFolder />
                     </span>
                 </div>
                 <div className='button-square' onClick={handleFloatPane}>
@@ -148,4 +74,4 @@ function Mapbar({ isAdmin, exportImage, setAlertAct, client }: any) {
     );
 }
 
-export default connect(UserState, AlertDispatchToProps)(Mapbar);
+export default connect(PointsState, PointsDispatchToProps)(Mapbar);
