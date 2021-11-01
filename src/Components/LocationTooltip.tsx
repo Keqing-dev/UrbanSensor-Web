@@ -180,7 +180,6 @@ function LocationTooltipFactory(LayerHoverInfo: any, CoordinateInfo: any) {
                             </PinnedButtons>
                         ) : null}
                         <PopoverContent>
-                            chupalo mati
                             {Array.isArray(coordinate) && <CoordinateInfo coordinate={coordinate} zoom={zoom} />}
                             {layerHoverProp && <LayerHoverInfo {...layerHoverProp} />}
                         </PopoverContent>
