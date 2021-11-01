@@ -36,29 +36,31 @@ const Row = ({ name, value, deltaValue, url }: any) => {
         url = value;
     }
 
-    let fileComponent;
-    switch (value) {
-        case value.match(/.aac/)?.input:
-            fileComponent = (
-                <audio controls>
-                    <source src={value} />
-                </audio>
-            );
-            break;
-        case value.match(/.jpg/)?.input:
-            fileComponent = <img src={value} alt='' />;
-            break;
-        case value.match(/.mp4/)?.input:
-            fileComponent = (
-                <video height='384' width='216' controls>
-                    <source src={value} />
-                </video>
-            );
-            break;
-        default:
-            fileComponent = <img src={value} alt='' />;
-    }
     const asImg = /<img>/.test(name);
+
+    let fileComponent;
+    if (asImg)
+        switch (value) {
+            case value.match(/.aac/)?.input:
+                fileComponent = (
+                    <audio controls>
+                        <source src={value} />
+                    </audio>
+                );
+                break;
+            case value.match(/.jpg/)?.input:
+                fileComponent = <img src={value} alt='' />;
+                break;
+            case value.match(/.mp4/)?.input:
+                fileComponent = (
+                    <video height='384' width='216' controls>
+                        <source src={value} />
+                    </video>
+                );
+                break;
+            default:
+                fileComponent = <img src={value} alt='' />;
+        }
     return (
         <tr className='row' key={name}>
             <td className='row__name'>{name}</td>
@@ -144,12 +146,7 @@ const CellInfo = ({ data, layer }: any) => {
 type LayerHoverInfo = {
     fields: Array<any>;
     fieldsToShow: Array<any>;
-    layer: {
-        config: {
-            label: string;
-        };
-        isAggregated: boolean;
-    };
+    layer: any;
     data: Array<any> | object;
 };
 
