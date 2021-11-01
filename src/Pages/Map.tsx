@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { KeplerGl } from 'kepler.gl/dist/components';
 import { connect, useDispatch } from 'react-redux';
 import Mapbar from '../Components/Navigators/Mapbar';
 import { PointsState } from '../Redux';
@@ -8,6 +7,7 @@ import * as Unicons from '@iconscout/react-unicons';
 import { logout } from '../utils/logout';
 import { useHistory } from 'react-router-dom';
 import ProjectsList from '../Components/ProjectsList';
+import KeplerGl from '../Components/KeplerGl';
 
 const { REACT_APP_MAPBOX_TOKEN } = process.env;
 
@@ -33,15 +33,9 @@ function Map({ isSelected }: any) {
         };
     }, []);
 
-
-
-
-
     return (
         <>
-            {!isSelected? (
-               <ProjectsList/>
-            ) : null}
+            {!isSelected ? <ProjectsList /> : null}
 
             {error ? (
                 <div className='loading-content'>
