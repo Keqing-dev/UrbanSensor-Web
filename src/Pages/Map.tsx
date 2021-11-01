@@ -15,7 +15,6 @@ function Map({ isSelected }: any) {
     const history = useHistory();
     const [error] = useState(false);
 
-
     useEffect(() => {
         // @ts-ignore
         document.getElementById('root').style.overflowY = 'hidden';
