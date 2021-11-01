@@ -1,0 +1,134 @@
+:root {
+  --float-button-group-top: 0;
+}
+
+.float-button-group {
+  position: absolute;
+  display: grid;
+  row-gap: 8px;
+  padding: 12px;
+  top: var(--float-button-group-top);
+  //top: 52px;
+  right: 40px;
+  z-index: 2;
+  transition: 0.25s;
+
+}
+
+.float-button-group-active {
+  $float-pane-width:calc(100vw - 128px);
+  left: 32px;
+}
+
+.button-square {
+  position: relative;
+  color: white;
+  display: flex;
+  box-shadow: 0 6px 12px rgb(0, 0, 0, 0.16);
+
+  justify-content: center;
+  align-items: center;
+
+  background: $secondary;
+  min-width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  svg {
+    display: flex;
+    position: relative;
+    margin: auto;
+    color: $icon;
+    transition: 0.25s;
+
+    &:hover {
+      color: $icon-active;
+    }
+  }
+
+  span {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &:before {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      right: 120%;
+      content: '';
+      height: 100%;
+      background: rgba(41, 50, 60, 0.7);
+      border-radius: 4px;
+      width: 0;
+      font-size: 0.8rem;
+      color: $gray;
+      font-weight: 300;
+    }
+
+    &:hover::before {
+      content: attr(menu-name);
+      width: 140px;
+      padding: 0 12px;
+
+    }
+
+  }
+
+
+}
+
+
+.add-layer-button {
+  display: none !important;
+}
+
+.button-min {
+  background: #A0A7B4;
+  color: white;
+  border-radius: 2px;
+  padding: 9px 12px;
+  display: flex;
+  font-size: 0.75rem;
+
+  span {
+    color: white;
+    font-weight: 400;
+    margin: auto;
+  }
+
+  svg {
+    color: white;
+    margin-right: 10px;
+  }
+}
+
+@media (min-width: 200px) {
+  .float-button-group-active {
+    left: 0;
+    right: unset;
+    z-index: 2000;
+  }
+
+}
+
+@include media-breakpoint-up(md) {
+  .float-button-group-active {
+    $float-pane-width: 45vw;
+    right: calc(#{$float-pane-width} + 56px);
+    left: unset;
+    z-index: 2000;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .float-button-group-active {
+    $float-pane-width: 45vw;
+    right: calc(#{$float-pane-width} + 56px);
+    z-index: 2;
+  }
+}
