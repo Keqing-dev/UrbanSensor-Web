@@ -89,6 +89,16 @@ const appReducer = handleActions(
                 ...state,
             };
         },
+        [ActionTypes.SET_CLOUD_PROVIDER]: (state, action) => {
+            // Evento de configuracion de un layer
+            // console.log('AAA');
+            console.log('SET_CLOUD_PROVIDER');
+            console.log(action);
+            return {
+                ...state,
+                // viewport: { ...action.payload },
+            };
+        },
     },
     {},
 );

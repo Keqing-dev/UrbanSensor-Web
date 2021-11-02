@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import * as Unicons from '@iconscout/react-unicons';
 import { useHistory } from 'react-router-dom';
 import { logout } from '../../utils/logout';
@@ -7,7 +7,7 @@ import { PointsState } from '../../Redux';
 import Charts from '../Charts';
 import { PointsDispatchToProps } from '../../Redux/Actions/PointsAction';
 
-function Mapbar({ setProjectAct }: any) {
+function Mapbar({ setProjectAct, isGuest }: any) {
     const history = useHistory();
     const [isExpanded, setExpanded] = useState(false);
 
@@ -26,32 +26,42 @@ function Mapbar({ setProjectAct }: any) {
         }
     }
 
+
     return (
         <div>
 
             <div id='float-button-group-section' className='float-button-group '>
-
-                <div className='button-square' id='butt' onClick={()=>setProjectAct(false)}>
-                    <span menu-name='Proyectos'>
-                        <Unicons.UilFolder />
-                    </span>
-                </div>
-                <div className='button-square' onClick={handleFloatPane}>
-                    <span menu-name='Graficos'>
-                        {isExpanded ? <Unicons.UilArrowRight /> : <Unicons.UilChartLine />}
-                    </span>
-                </div>
-                <div
-                    className='button-square'
-                    onClick={() => {
-                        logout();
-                        history.replace('/');
-                    }}
-                >
-                    <span menu-name='Cerrar Sesion'>
-                        <Unicons.UilSignOutAlt />
-                    </span>
-                </div>
+                {
+                    isGuest ?
+                        <div className='button-square' id='butt' onClick={() => history.replace('/')}>
+                            <span menu-name='Inicio'>
+                                <Unicons.UilHome/>
+                            </span>
+                        </div> :
+                        <>
+                            <div className='button-square' id='butt' onClick={() => setProjectAct(false)}>
+                                <span menu-name='Proyectos'>
+                                    <Unicons.UilFolder />
+                                </span>
+                            </div>
+                            <div className='button-square' onClick={handleFloatPane}>
+                                <span menu-name='Graficos'>
+                                    {isExpanded ? <Unicons.UilArrowRight /> : <Unicons.UilChartLine />}
+                                </span>
+                            </div>
+                            <div
+                                className='button-square'
+                                onClick={() => {
+                                    logout();
+                                    history.replace('/');
+                                }}
+                            >
+                            <span menu-name='Cerrar Sesion'>
+                                <Unicons.UilSignOutAlt />
+                            </span>
+                            </div>
+                        </>
+                }
             </div>
 
             <Charts />

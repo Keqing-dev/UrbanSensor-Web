@@ -32,6 +32,7 @@ export default class ProtectedRoute extends React.Component {
                             user: {
                                 isAuth: true,
                                 id: decoded.sub,
+                                isGuest:false,
                             },
                         });
                         this.setState(() => ({ isLoading: false, isAuth: true }));
