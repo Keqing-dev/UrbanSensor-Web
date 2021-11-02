@@ -1,8 +1,7 @@
 const initialState = {
     isAuth: false,
-    isAdmin: false,
+    isGuest: true,
     id: null,
-    bucket: null,
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -12,6 +11,11 @@ const UserReducer = (state = initialState, action) => {
                 ...state,
                 ...action.user,
             };
+        case'SET_GUEST':
+            return {
+                ...state,
+                isGuest: action.isGuest
+            }
         case 'LOGOUT':
             return initialState;
         default:

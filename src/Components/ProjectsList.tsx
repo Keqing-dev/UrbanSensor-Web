@@ -66,7 +66,7 @@ function ProjectsList({ setProjectAct }: any) {
             }
             setProjects(projects.concat(data.content));
             setPage(page + 1);
-        }).catch((err)=>{
+        }).catch(()=>{
             setError(true)
         })
         return () => {
@@ -155,7 +155,7 @@ function ProjectsList({ setProjectAct }: any) {
                                             </div>
                                         );
                                     } else {
-                                        return <></>;
+                                        return <div key={index}/>;
                                     }
                                 })
                             }

@@ -1,20 +1,27 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { KeplerGl } from 'kepler.gl/dist/components';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Mapbar from '../Components/Navigators/Mapbar';
 import { PointsState } from '../Redux';
 import { PointsDispatchToProps } from '../Redux/Actions/PointsAction';
 import * as Unicons from '@iconscout/react-unicons';
 import { logout } from '../utils/logout';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import ProjectsList from '../Components/ProjectsList';
+import { CLOUD_PROVIDERS } from '../cloud-providers';
+import { processKeplerglJSON } from 'kepler.gl/processors';
+import { addDataToMap } from 'kepler.gl/actions';
+import { Puff } from '@agney/react-loading';
 
 const { REACT_APP_MAPBOX_TOKEN } = process.env;
 
-function Map({ isSelected }: any) {
+function Map({ isSelected, setProjectAct, isGuest }: any) {
     const history = useHistory();
-    const [error] = useState(false);
-
+    const dispatch = useDispatch();
+    const [error, setError] = useState(false);
+    const [loading,setLoading] = useState(true);
+    const query = new URLSearchParams(useLocation().search);
 
     useEffect(() => {
         // @ts-ignore
@@ -25,11 +32,53 @@ function Map({ isSelected }: any) {
         };
     }, []);
 
+    useEffect(() => {
+        if (query.get('sharedMap') !== null) {
+            axios.get(query.get('sharedMap') as string).then(res => {
+                return res.data;
+            }).then((data: any) => {
+                dispatch(
+                    addDataToMap(processKeplerglJSON(data)),
+                );
+                setProjectAct(true);
+                dispatch({
+                    type: 'SET_GUEST',
+                    isGuest: true,
+                });
+                setLoading(false);
+            }).catch(() => {
+                setError(true);
+                setLoading(false);
+            });
+        } else {
+            dispatch({
+                type: 'SET_GUEST',
+                isGuest: false,
+            });
+        }
+        // eslint-disable-next-line
+    }, [query]);
+    const localeMessages = {
+        en: {
+            // eslint-disable-next-line
+            ['toolbar.shareMapURL']: 'Compartir mapa',
+        },
+    };
     return (
         <>
-            {!isSelected? (
-               <ProjectsList/>
+            { loading && isGuest? (
+                <div className='loading-content' data-html2canvas-ignore>
+                    {/*//@ts-ignore*/}
+                    <Puff width={50} />
+                    <p>Cargando datos</p>
+                </div>
             ) : null}
+
+
+            {!isSelected && !isGuest ? (
+                <ProjectsList />
+            ) : null}
+
 
             {error ? (
                 <div className='loading-content'>
@@ -55,7 +104,9 @@ function Map({ isSelected }: any) {
                         appName='UrbanSensor'
                         appWebsite=''
                         version='0.5'
+                        localeMessages={localeMessages}
                         mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
+                        cloudProviders={CLOUD_PROVIDERS}
                     />
                 </>
             )}

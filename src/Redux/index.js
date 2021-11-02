@@ -27,6 +27,9 @@ export const AlertState = (state, props) => ({
     message: state.AlertReducer.message,
 });
 
+
+
+
 const reducers = combineReducers({
     keplerGl: keplerGlReducer.initialState({
         uiState: {
