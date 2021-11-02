@@ -300,19 +300,48 @@ i {
 
 }
 
+.video-player {
+  $size: 200px;
+  &-container {
+    position: relative;
 
-.map-popover__layer-info{
-  .row{
-
-    img{
-      width: 200px;
-      height: 200px;
+    video, img {
+      width: $size;
+      height: $size;
       object-fit: cover;
-      object-position: center;
     }
   }
 
+  &-icon {
+    &-wrapper {
+      height: $size;
+      width: $size;
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-button {
+      height: 36px;
+      width: 36px;
+      border-radius: 100%;
+      background: rgba(106, 116, 133, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(106, 116, 133, 0.8);
+
+      }
+    }
+  }
 }
+
 
 @media (min-width: 200px) {
   .login-container {

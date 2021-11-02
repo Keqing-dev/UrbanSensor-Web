@@ -3,7 +3,9 @@ import { CenterFlexbox } from 'kepler.gl/dist/components/common/styled-component
 import { Layers } from 'kepler.gl/dist/components/common/icons';
 import { notNullorUndefined } from 'kepler.gl/dist/utils/data-utils';
 import { getTooltipDisplayDeltaValue, getTooltipDisplayValue } from 'kepler.gl/dist/utils/interaction-utils';
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '@mui/material/Modal';
+import { UilPlay, UilSearchPlus } from '@iconscout/react-unicons';
 
 export const StyledLayerName = styled(CenterFlexbox)`
     color: ${(props) => props.theme.textColorHl};
@@ -35,6 +37,9 @@ const Row = ({ name, value, deltaValue, url }: any) => {
     if (!url && value && typeof value === 'string' && value.match(/^http/)) {
         url = value;
     }
+    const [open, setOpen] = useState<boolean>(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const asImg = /<img>/.test(name);
 
@@ -49,13 +54,41 @@ const Row = ({ name, value, deltaValue, url }: any) => {
                 );
                 break;
             case value.match(/.jpg/)?.input:
-                fileComponent = <img src={value} alt='' />;
+                fileComponent = (
+                    <>
+                        <div className='video-player-container' onClick={handleOpen}>
+                            <img src={value} alt='' />
+                            <div className='video-player-icon-wrapper'>
+                                <div className='video-player-icon-button'>
+                                    <UilSearchPlus />
+                                </div>
+                            </div>
+                        </div>
+                        <Modal className='d-flex h-100 w-100' open={open} onClose={handleClose}>
+                            <img className='d-flex h-75 m-auto' src={value} alt='' />
+                        </Modal>
+                    </>
+                );
                 break;
             case value.match(/.mp4/)?.input:
                 fileComponent = (
-                    <video height='384' width='216' controls>
-                        <source src={value} />
-                    </video>
+                    <>
+                        <div className='video-player-container' onClick={handleOpen}>
+                            <video>
+                                <source src={value} />
+                            </video>
+                            <div className='video-player-icon-wrapper'>
+                                <div className='video-player-icon-button'>
+                                    <UilPlay />
+                                </div>
+                            </div>
+                        </div>
+                        <Modal className='d-flex h-100 w-100' open={open} onClose={handleClose}>
+                            <video className='d-flex h-75 m-auto' controls>
+                                <source src={value} />
+                            </video>
+                        </Modal>
+                    </>
                 );
                 break;
             default:

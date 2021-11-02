@@ -18,6 +18,7 @@ function Map({ isSelected }: any) {
     useEffect(() => {
         // @ts-ignore
         document.getElementById('root').style.overflowY = 'hidden';
+        document.querySelector('html')!.style.overflowY = 'hidden';
         return () => {
             // @ts-ignore
             document.getElementById('root').style.overflowY = 'initial';
