@@ -1,6 +1,10 @@
 declare module 'kepler.gl';
-declare module 'kepler.gl/dist/components'
-declare module 'kepler.gl/actions'
-declare module 'kepler.gl/reducers'
-declare module 'kepler.gl/processors'
-
+declare module 'kepler.gl/dist/components';
+declare module 'kepler.gl/dist/components/common/styled-components';
+declare module 'kepler.gl/dist/components/common/icons';
+declare module 'kepler.gl/dist/localization';
+declare module 'kepler.gl/dist/utils/data-utils';
+declare module 'kepler.gl/dist/utils/interaction-utils';
+declare module 'kepler.gl/actions';
+declare module 'kepler.gl/reducers';
+declare module 'kepler.gl/processors';

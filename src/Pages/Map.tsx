@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { KeplerGl } from 'kepler.gl/dist/components';
 import { connect, useDispatch } from 'react-redux';
 import Mapbar from '../Components/Navigators/Mapbar';
 import { PointsState } from '../Redux';
@@ -13,6 +12,7 @@ import { CLOUD_PROVIDERS } from '../cloud-providers';
 import { processKeplerglJSON } from 'kepler.gl/processors';
 import { addDataToMap } from 'kepler.gl/actions';
 import { Puff } from '@agney/react-loading';
+import KeplerGl from '../Components/KeplerGl';
 
 const { REACT_APP_MAPBOX_TOKEN } = process.env;
 
