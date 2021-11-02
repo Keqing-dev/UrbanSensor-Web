@@ -124,14 +124,16 @@ function ProjectsList({ setProjectAct }: any) {
                     <>
                         <header>Selecciona un proyecto</header>
                         <InfiniteScroll
-                            className={'row row-cols-2'}
+                            className={`row row-cols-1 ${projects.length < 5? 'row-cols-md-1':'row-cols-md-2' }`}
                             dataLength={projects.length}
                             next={() => handleInfiniteScroll()}
                             hasMore={hasMore}
                             scrollThreshold={0.65}
-                            loader={<div className='m-auto'>
-                                {/*//@ts-ignore*/}
-                                <Puff width={50} />
+                            loader={<div className='m-auto  d-flex'>
+                                <div className='m-auto'>
+                                    {/*//@ts-ignore*/}
+                                    <Puff width={50} />
+                                </div>
                             </div>}
                             scrollableTarget='scrollableMiddleContainer'
                             endMessage={

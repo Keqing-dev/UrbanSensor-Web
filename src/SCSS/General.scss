@@ -266,7 +266,7 @@ i {
   flex-direction: column;
   height: auto;
   width: auto;
-  max-width: 500px;
+  max-width: 650px;
   transition: 0.25s;
   margin: 12px 0;
 
@@ -275,7 +275,7 @@ i {
   .project {
     background-color: $secondary;
 
-    //width: 200px;
+    width: 300px;
     padding: 10px;
     display: flex;
     justify-content: flex-start;
@@ -289,12 +289,22 @@ i {
 
     svg {
       margin: auto 0 auto 10px;
+      width: 30px;
+      height: 30px;
     }
 
     div {
       display: flex;
       flex-direction: column;
-      margin-left: 10px;
+      margin-left: 20px;
+
+      P {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
     }
   }
 
@@ -302,6 +312,7 @@ i {
 
 .video-player {
   $size: 200px;
+
   &-container {
     position: relative;
 
@@ -369,6 +380,7 @@ i {
       }
     }
   }
+
 }
 
 
