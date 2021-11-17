@@ -1,6 +1,42 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Env
+Generar archivo .env en la ruta raiz del proyecto, con la siguiente estructura:
+```
+
+REACT_APP_MAPBOX_TOKEN=<TOKEN>
+REACT_APP_MAPBOX_STYLE_URL=<URL de mapbox Ejemplo: mapbox://styles/usuario/token>
+PORT=3000
+GENERATE_SOURCEMAP=false
+REACT_APP_API_URL = URL DE CONEXION A LA API
+REACT_APP_DROPBOX_TOKEN=<APIKEY>
+REACT_APP_DROPBOX_CLIENT_NAME=<CLIENT NAME>
+
+
+```
+
+### DropBox
+Crear aplicacion en [Dropbox](https://www.dropbox.com/developers/), y marcar las siguientes casillas en Permissions:
+```
+account_info.read
+
+files.metadata.write
+files.metadata.read
+
+files.content.write
+files.content.read
+
+sharing.write
+sharing.read
+```
+
+Permission type : ``` Scoped app (App folder) ```
+OAuth 2:  
+```
+ejemplo.com/auth (remplazar por nombre del dominio donde este levantado)
+```
+Access token expiration: No expiration
 
 ## Available Scripts
 
