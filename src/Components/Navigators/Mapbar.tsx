@@ -43,12 +43,7 @@ function Mapbar({ setProjectAct, isGuest }: any) {
                                 <span menu-name='Proyectos'>
                                     <Unicons.UilFolder />
                                 </span>
-                            </div>
-                            <div className='button-square' onClick={handleFloatPane}>
-                                <span menu-name='Graficos'>
-                                    {isExpanded ? <Unicons.UilArrowRight /> : <Unicons.UilChartLine />}
-                                </span>
-                            </div>
+                            </div>    
                             <div
                                 className='button-square'
                                 onClick={() => {
